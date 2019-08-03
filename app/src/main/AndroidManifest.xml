@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.odbpo.fenggo.broadcast_service">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name="com.odbpo.fenggo.broadcast_service.Main3Activity" />
+        <activity android:name="com.odbpo.fenggo.broadcast_service.Main2Activity" />
+        <activity android:name="com.odbpo.fenggo.broadcast_service.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.odbpo.fenggo.broadcast_service.service.UseStartService"/>
+        <service android:name="com.odbpo.fenggo.broadcast_service.service.UseStartIntentService"/>
+        <service android:name="com.odbpo.fenggo.broadcast_service.service.UseBindService"/>
+        <service android:name="com.odbpo.fenggo.broadcast_service.service.UseBindIntentService"/>
+
+    </application>
+
+</manifest>
