@@ -5,6 +5,11 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
@@ -16,32 +21,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="使用start方式开启Service"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_start_intent_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="使用start方式开启IntentService"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_bind_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="使用bind方式开启Service"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_bind_intent_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="使用bind方式开启IntentService"
-        android:textAllCaps="false"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_content"/>
+        android:textAllCaps="false" />
 
 </LinearLayout>

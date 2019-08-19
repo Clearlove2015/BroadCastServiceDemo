@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.odbpo.fenggo.broadcast_service.receiver.IntentServiceReceiver;
-import com.odbpo.fenggo.broadcast_service.receiver.MyReceiver;
+import com.odbpo.fenggo.broadcast_service.receiver.CommonReceiver;
+import com.odbpo.fenggo.broadcast_service.receiver.LocalReceiver;
 import com.odbpo.fenggo.broadcast_service.receiver.ReceiverConstant;
 import com.odbpo.fenggo.broadcast_service.receiver.ServiceReceiver;
 import com.odbpo.fenggo.broadcast_service.service.UseBindIntentService;
@@ -42,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_bind_intent_service)
     Button btnBindIntentService;
 
-    private MyReceiver receiver;
+    private CommonReceiver commonReceiver;
+    private LocalReceiver localReceiver;
+    private LocalBroadcastManager localBroadcastManager;
+
     private ServiceReceiver serviceReceiver;
     private IntentServiceReceiver intentServiceReceiver;
 
@@ -55,26 +60,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initReceiver() {
-        receiver = new MyReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ReceiverConstant.TEST_BROADCAST);
-        registerReceiver(receiver, filter);//注册
+        //注册普通广播
+        commonReceiver = new CommonReceiver(tvContent);
+        IntentFilter commonFilter = new IntentFilter();
+        commonFilter.addAction(ReceiverConstant.COMMON_BROADCAST);
+        registerReceiver(commonReceiver, commonFilter);//注册
+
+        //注册应用内广播
+        localReceiver = new LocalReceiver(tvContent);
+        IntentFilter localFilter = new IntentFilter();
+        localFilter.addAction(ReceiverConstant.LOCAL_BROADCAST);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager.registerReceiver(localReceiver,localFilter);
 
         serviceReceiver = new ServiceReceiver();
-        IntentFilter filter1 = new IntentFilter();
-        filter1.addAction(ReceiverConstant.START_SERVICE);
-        registerReceiver(serviceReceiver,filter1);
+        IntentFilter serviceFilter = new IntentFilter();
+        serviceFilter.addAction(ReceiverConstant.START_SERVICE);
+        registerReceiver(serviceReceiver,serviceFilter);
 
         intentServiceReceiver = new IntentServiceReceiver();
-        IntentFilter filter2 = new IntentFilter();
-        filter2.addAction(ReceiverConstant.START_INTENT_SERVICE);
-        registerReceiver(intentServiceReceiver,filter2);
+        IntentFilter intentServiceFilter = new IntentFilter();
+        intentServiceFilter.addAction(ReceiverConstant.START_INTENT_SERVICE);
+        registerReceiver(intentServiceReceiver,intentServiceFilter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(receiver);//注销
+        unregisterReceiver(commonReceiver);//注销普通广播
+        localBroadcastManager.unregisterReceiver(localReceiver);//注销应用内广播
         unregisterReceiver(serviceReceiver);
         unregisterReceiver(intentServiceReceiver);
     }

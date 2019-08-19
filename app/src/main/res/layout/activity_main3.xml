@@ -5,15 +5,21 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/send_broadcast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发送广播" />
+        android:text="发送普通广播" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/send_local_broadcast"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_content"/>
+        android:text="发送应用内广播" />
 
 </LinearLayout>
